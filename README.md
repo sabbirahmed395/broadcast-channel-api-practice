@@ -12,4 +12,4 @@ cd broadcast-channel-api-practice
 docker-compose up -d
 ```
 
-In browers type ```http://localhost``` or ```127.0.0.1``` or ```your local ip```
+In browers type ```http://localhost/index.html``` or ```127.0.0.1/index.html``` or ```[your local ip]//index.html```
