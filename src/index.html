@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broadcase Channel API</title>
+</head>
+<body>
+    <h1>Welcome to Broadcast Channel API</h1>
+
+    <div id="message-box">
+
+    </div>
+    <form id="message-form">
+        <input type="text" id="message">
+        <input type="button" id="send" value="Send">
+    </form>
+    <script>
+        let sendBtn = document.getElementById("send");
+        document.getElementById("message-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            sendBtn.click();
+        })
+
+        const bc = new BroadcastChannel("my_channel");
+
+        bc.addEventListener("message", e => {
+            printMessage("Annonymus", e.data)
+            // console.log(e.data);
+        });
+
+        let printMessage = function(sender, message) {
+            let messageBox = document.getElementById("message-box");
+            let p = document.createElement("p");
+            let strong = document.createElement("strong");
+            let you = document.createTextNode(sender + ": ");
+            strong.append(you);
+            p.append(strong);
+            p.append(message);
+            messageBox.append(p);
+        }
+
+        sendBtn.addEventListener("click", function() {
+            let messageInput = document.getElementById("message");
+            let message = messageInput.value;
+            bc.postMessage(message);
+            messageInput.value = "";
+            printMessage("You", message);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+version: '3'
+
+networks:
+  practice_broadcast_channel_api:
+
+services:
+  site:
+    build:
+      context: .
+      dockerfile: nginx.dockerfile
+    container_name: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./src:/var/www/html:delegated
+    networks:
+      - practice_broadcast_channel_api
